@@ -1,6 +1,6 @@
 package classes;
 
-public class TelephoneLine {
+public abstract class TelephoneLine {
     
     private double time;
     private double numberCalls;
