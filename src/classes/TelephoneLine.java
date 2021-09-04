@@ -6,10 +6,8 @@ public abstract class TelephoneLine {
     private double numberCalls;
     private double totalCost;
     
-    public TelephoneLine(double time, double numberCalls, double totalCost) {
+    public TelephoneLine(double time) {
         this.time = time;
-        this.numberCalls = numberCalls;
-        this.totalCost = totalCost;
     }
 
     public double getTime() {
@@ -18,22 +16,6 @@ public abstract class TelephoneLine {
 
     public void setTime(double time) {
         this.time = time;
-    }
-
-    public double getNumberCalls() {
-        return numberCalls;
-    }
-
-    public void setNumberCalls(double numberCalls) {
-        this.numberCalls = numberCalls;
-    }
-
-    public double getTotalCost() {
-        return totalCost;
-    }
-
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
     }
 
     @Override

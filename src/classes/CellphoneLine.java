@@ -6,9 +6,8 @@ public class CellphoneLine extends AlternativeLine {
     private double minuteCellphone;
     public static double localBalance = 50;
     
-    public CellphoneLine(double time, double numberCalls, double totalCost, double minuteLocal,
-            double minuteCellphone) {
-        super(time, numberCalls, totalCost);
+    public CellphoneLine(double time, double minuteLocal, double minuteCellphone) {
+        super(time);
         this.minuteLocal = 2;
         this.minuteCellphone = 4;
     }

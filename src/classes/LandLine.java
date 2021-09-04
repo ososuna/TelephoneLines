@@ -6,8 +6,8 @@ public class LandLine extends TelephoneLine {
     private double minuteLongDistance;
     private double minuteCellphone;
     
-    public LandLine(double time, double numberCalls, double totalCost) {
-        super(time, numberCalls, totalCost);
+    public LandLine(double time) {
+        super(time);
         this.minuteLocal = 1;
         this.minuteLongDistance = 1.5;
         this.minuteCellphone = 2;
