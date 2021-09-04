@@ -6,12 +6,11 @@ public class LandLine extends TelephoneLine {
     private double minuteLongDistance;
     private double minuteCellphone;
     
-    public LandLine(double balance, double time, double numberCalls, double totalCost, double minuteLocal,
-            double minuteLongDistance, double minuteCellphone) {
-        super(balance, time, numberCalls, totalCost);
-        this.minuteLocal = minuteLocal;
-        this.minuteLongDistance = minuteLongDistance;
-        this.minuteCellphone = minuteCellphone;
+    public LandLine(double time, double numberCalls, double totalCost) {
+        super(time, numberCalls, totalCost);
+        this.minuteLocal = 1;
+        this.minuteLongDistance = 1.5;
+        this.minuteCellphone = 2;
     }
 
     public double getMinuteLocal() {

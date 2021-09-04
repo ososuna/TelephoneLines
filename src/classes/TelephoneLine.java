@@ -2,24 +2,14 @@ package classes;
 
 public class TelephoneLine {
     
-    private double balance;
     private double time;
     private double numberCalls;
     private double totalCost;
     
-    public TelephoneLine(double balance, double time, double numberCalls, double totalCost) {
-        this.balance = balance;
+    public TelephoneLine(double time, double numberCalls, double totalCost) {
         this.time = time;
         this.numberCalls = numberCalls;
         this.totalCost = totalCost;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     public double getTime() {
@@ -48,7 +38,7 @@ public class TelephoneLine {
 
     @Override
     public String toString() {
-        return "TelephoneLine [balance=" + balance + ", numberCalls=" + numberCalls + ", time=" + time + ", totalCost="
-                + totalCost + "]";
+        return "TelephoneLine [numberCalls=" + numberCalls + ", time=" + time + ", totalCost=" + totalCost + "]";
     }
+
 }

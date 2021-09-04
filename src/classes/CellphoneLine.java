@@ -1,15 +1,16 @@
 package classes;
 
-public class CellphoneLine extends TelephoneLine {
+public class CellphoneLine extends AlternativeLine {
     
     private double minuteLocal;
     private double minuteCellphone;
+    public static double localBalance = 50;
     
-    public CellphoneLine(double balance, double time, double numberCalls, double totalCost, double minuteLocal,
+    public CellphoneLine(double time, double numberCalls, double totalCost, double minuteLocal,
             double minuteCellphone) {
-        super(balance, time, numberCalls, totalCost);
-        this.minuteLocal = minuteLocal;
-        this.minuteCellphone = minuteCellphone;
+        super(time, numberCalls, totalCost);
+        this.minuteLocal = 2;
+        this.minuteCellphone = 4;
     }
 
     public double getMinuteLocal() {
