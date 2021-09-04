@@ -7,9 +7,18 @@ public class Menu {
     
     public static int option;
     public static Scanner scanner = new Scanner(System.in);
-    public static ArrayList<LandLine> landLineCalls = new ArrayList<LandLine>();
-    public static ArrayList<CellphoneLine> CellphoneLineCalls = new ArrayList<CellphoneLine>();
-    public static ArrayList<VozIP> vozIPCalls = new ArrayList<VozIP>();
+    
+    public static ArrayList<LandLine> landLineLocalCalls = new ArrayList<LandLine>();
+    public static ArrayList<LandLine> landLineCellphoneCalls = new ArrayList<LandLine>();
+    public static ArrayList<LandLine> landLineLongDistanceCalls = new ArrayList<LandLine>();
+    
+    public static ArrayList<CellphoneLine> cellphoneLineLocalCalls = new ArrayList<CellphoneLine>();
+    public static ArrayList<CellphoneLine> cellphoneLineCellphoneCalls = new ArrayList<CellphoneLine>();
+    
+    public static ArrayList<VozIP> vozIPLocalCalls = new ArrayList<VozIP>();
+    public static ArrayList<VozIP> vozIPCellphoneCalls = new ArrayList<VozIP>();
+    public static ArrayList<VozIP> vozIPLongDistanceCalls = new ArrayList<VozIP>();
+
 
     public Menu() {
         startMenu();
@@ -52,32 +61,106 @@ public class Menu {
 
     public static void registerCall() {
         
+        int optionLine;
         int optionCall;
+        double time;        
+
+        System.out.println("\nSelect call line");
+        System.out.println("1. Land line");
+        System.out.println("2. Cellphone line");
+        System.out.println("3. VozIP line");
+        System.out.println();
+        optionLine = scanner.nextInt();
+        System.out.println();
+
+        System.out.println("Enter time in minutes: ");
+        time = scanner.nextDouble();
         
-        do {
-            System.out.println("\nSelect call line");
-            System.out.println("1. Land line");
-            System.out.println("2. Cellphone line");
-            System.out.println("3. VozIP line");
-            System.out.println();
-            optionCall = scanner.nextInt();
-            System.out.println();
+        System.out.println("\nSelect call type");
+        
+        switch (optionLine) {
+            case 1:
+                System.out.println("1. Local");
+                System.out.println("2. Long distance");
+                System.out.println("3. Cellphone");
+                optionCall = scanner.nextInt();
+                System.out.println();
+                addLandLineCall(time, optionCall);
+                break;
+            case 2:
+                System.out.println("1. Local");
+                System.out.println("2. Cellphone");
+                optionCall = scanner.nextInt();
+                System.out.println();
+                addCellphoneLineCall(time, optionCall);
+                break;
+            case 3:
+                System.out.println("1. Local");
+                System.out.println("2. Long distance");
+                System.out.println("3. Cellphone");
+                optionCall = scanner.nextInt();
+                System.out.println();
+                addLandLineCall(time, optionCall);
+                break;
+            default:
+                break;
+        }
 
-            switch (optionCall) {
-                case 1:
-                    
-                    break;
-                case 2:
-                    
-                    break;
-                case 3:
-                    
-                    break;
-                default:
-                    break;
-            }
+    }
 
-        } while (optionCall>= 1 && optionCall <= 3);   
+    public static void addLandLineCall(double time, int callType) {
+        
+        LandLine landLineCall = new LandLine(time);
+        
+        switch (callType) {
+            case 1:
+                landLineLocalCalls.add(landLineCall);
+                break;       
+            case 2:
+                landLineLongDistanceCalls.add(landLineCall);
+                break;
+            case 3:
+                landLineCellphoneCalls.add(landLineCall);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void addCellphoneLineCall(double time, int callType) {
+        
+        CellphoneLine cellphoneLineCall = new CellphoneLine(time);
+        
+        switch (callType) {
+            case 1:
+                cellphoneLineLocalCalls.add(cellphoneLineCall);
+                break;       
+            case 2:
+                cellphoneLineCellphoneCalls.add(cellphoneLineCall);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void addVozIPCall(double time, int callType) {
+
+        VozIP vozIPCall = new VozIP(time);
+
+        switch (callType) {
+            case 1:
+                vozIPLocalCalls.add(vozIPCall);
+                break;
+            case 2:
+                vozIPLongDistanceCalls.add(vozIPCall);
+                break;
+            case 3:
+                vozIPCellphoneCalls.add(vozIPCall);
+                break;
+            default:
+                break;
+        }
+
     }
 
 }

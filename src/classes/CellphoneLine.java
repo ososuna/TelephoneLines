@@ -6,7 +6,7 @@ public class CellphoneLine extends AlternativeLine {
     private double minuteCellphone;
     public static double localBalance = 50;
     
-    public CellphoneLine(double time, double minuteLocal, double minuteCellphone) {
+    public CellphoneLine(double time) {
         super(time);
         this.minuteLocal = 2;
         this.minuteCellphone = 4;

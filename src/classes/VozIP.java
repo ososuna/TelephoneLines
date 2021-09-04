@@ -7,7 +7,7 @@ public class VozIP extends AlternativeLine {
     private double minuteCellphone;
     public static double cellphoneLongDistanceBalance;
     
-    public VozIP(double time, double minuteLocal, double minuteLongDistance, double minuteCellphone) {
+    public VozIP(double time) {
         super(time);
         this.minuteLocal = 1.5;
         this.minuteLongDistance = 0.8;
