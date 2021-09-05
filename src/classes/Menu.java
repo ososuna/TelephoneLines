@@ -7,6 +7,9 @@ public class Menu {
     
     public static int option;
     public static Scanner scanner = new Scanner(System.in);
+
+    public static double cellphoneLocalBalance = CellphoneLine.localBalance;
+    public static double vozIPCellphoneLongDistanceBalance = VozIP.cellphoneLongDistanceBalance;
     
     public static ArrayList<LandLine> landLineCalls = new ArrayList<LandLine>();
     public static ArrayList<CellphoneLine> cellphoneLineCalls = new ArrayList<CellphoneLine>();
@@ -75,7 +78,7 @@ public class Menu {
                 optionCall = scanner.nextInt();
                 System.out.println();
                 System.out.print("Enter time in minutes: ");
-                time = scanner.nextDouble();
+                time = scanner.nextDouble();                
                 addLandLineCall(time, optionCall);
                 break;
             case 2:
@@ -86,6 +89,13 @@ public class Menu {
                 System.out.println();
                 System.out.print("Enter time in minutes: ");
                 time = scanner.nextDouble();
+
+                if (optionCall == 1) {
+                    if (time * CellphoneLine.minuteLocal > cellphoneLocalBalance) {
+                        System.out.println("\nThere is not local balance available :(");
+                        return;
+                    }
+                }
                 addCellphoneLineCall(time, optionCall);
                 break;
             case 3:
@@ -97,6 +107,21 @@ public class Menu {
                 System.out.println();
                 System.out.print("Enter time in minutes: ");
                 time = scanner.nextDouble();
+
+                if (optionCall == 2) {
+                    if (time * VozIP.minuteLongDistance > vozIPCellphoneLongDistanceBalance) {
+                        System.out.println("\nThere is not cellphone and long distance balance available :(");
+                        return;
+                    }
+                }
+
+                if (optionCall == 3) {
+                    if (time * VozIP.minuteCellphone > vozIPCellphoneLongDistanceBalance) {
+                        System.out.println("\nThere is not cellphone and long distance balance available :(");
+                        return;
+                    }
+                }
+
                 addVozIPCall(time, optionCall);
                 break;
             default:
@@ -125,26 +150,29 @@ public class Menu {
         }
 
         landLineCalls.add(landLineCall);
+        System.out.println("\nThe call has been registered successfully :)");
         
     }
 
     public static void addCellphoneLineCall(double time, int callType) {
         
-        CellphoneLine landLineCall;
+        CellphoneLine cellphoneLineCall;
         
         switch (callType) {
             case 1:
-                landLineCall = new CellphoneLine(time, "Local");
+                cellphoneLineCall = new CellphoneLine(time, "Local");
+                cellphoneLocalBalance -= time * CellphoneLine.minuteLocal;
                 break;       
             case 2:
-                landLineCall = new CellphoneLine(time, "Cellphone");
+                cellphoneLineCall = new CellphoneLine(time, "Cellphone");
                 break;
             default:
-                landLineCall = new CellphoneLine(time, null);
+                cellphoneLineCall = new CellphoneLine(time, null);
                 break;
         }
 
-        cellphoneLineCalls.add(landLineCall);
+        cellphoneLineCalls.add(cellphoneLineCall);
+        System.out.println("\nThe call has been registered successfully :)");
         
     }
 
@@ -158,9 +186,11 @@ public class Menu {
                 break;       
             case 2:
                 vozIPCall = new VozIP(time, "Long distance");
+                vozIPCellphoneLongDistanceBalance -= time * VozIP.minuteLongDistance;
                 break;
             case 3:
                 vozIPCall = new VozIP(time, "Cellphone");
+                vozIPCellphoneLongDistanceBalance -= time * VozIP.minuteCellphone;
                 break;
             default:
                 vozIPCall = new VozIP(time, null);
@@ -168,6 +198,7 @@ public class Menu {
         }
 
         vozIPCalls.add(vozIPCall);
+        System.out.println("\nThe call has been registered successfully :)");
         
     }
 
@@ -178,6 +209,9 @@ public class Menu {
 
         if (landLineCalls.size() == 0) {
             System.out.println("\nThere are not land line calls registered :(");
+            System.out.println("\nNumber of calls: " + landLineCalls.size());
+            System.out.println("Total minutes: " + totalMinutes);
+            System.out.println("Total cost: $" + String.format("%.2f", totalCost));
             return;
         }
 
@@ -205,7 +239,8 @@ public class Menu {
         System.out.println("\n\nSummary:");
         System.out.println("\nNumber of calls: " + landLineCalls.size());
         System.out.println("Total minutes: " + totalMinutes);
-        System.out.println("Total cost: $" + totalCost);
+        System.out.println("Total cost: $" + String.format("%.2f", totalCost));
+        System.out.println();
     }
 
     public static void printCellphoneLineCalls() {
@@ -215,6 +250,11 @@ public class Menu {
 
         if (cellphoneLineCalls.size() == 0) {
             System.out.println("\nThere are not cellphone line calls registered :(");
+            System.out.println("\nNumber of calls: " + cellphoneLineCalls.size());
+            System.out.println("Total minutes: " + totalMinutes);
+            System.out.println("Total cost: $" + String.format("%.2f", totalCost));
+            System.out.println("Available local balance: $" + String.format("%.2f", cellphoneLocalBalance));
+            System.out.println();
             return;
         }
 
@@ -239,7 +279,9 @@ public class Menu {
         System.out.println("\n\nSummary:");
         System.out.println("\nNumber of calls: " + cellphoneLineCalls.size());
         System.out.println("Total minutes: " + totalMinutes);
-        System.out.println("Total cost: $" + totalCost);
+        System.out.println("Total cost: $" + String.format("%.2f", totalCost));
+        System.out.println("Available local balance: $" + String.format("%.2f", cellphoneLocalBalance));
+        System.out.println();
     }
 
     public static void printVozIPCalls() {
@@ -249,6 +291,10 @@ public class Menu {
 
         if (vozIPCalls.size() == 0) {
             System.out.println("\nThere are not vozIP calls registered :(");
+            System.out.println("Number of calls: " + vozIPCalls.size());
+            System.out.println("Total minutes: " + totalMinutes);
+            System.out.println("Total cost: $" + String.format("%.2f", totalCost));
+            System.out.println("Available cellphone and long distance balance: $" + String.format("%.2f", vozIPCellphoneLongDistanceBalance));
             return;
         }
 
@@ -277,6 +323,7 @@ public class Menu {
         System.out.println("Number of calls: " + vozIPCalls.size());
         System.out.println("Total minutes: " + totalMinutes);
         System.out.println("Total cost: $" + String.format("%.2f", totalCost));
+        System.out.println("Available cellphone and long distance balance: $" + String.format("%.2f", vozIPCellphoneLongDistanceBalance));
         System.out.println();
     }
 
