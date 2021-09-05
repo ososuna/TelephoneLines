@@ -9,6 +9,12 @@ public class VozIP extends TelephoneLine {
     
     public VozIP(double time, String callType) {
         super(time, callType);
-    }    
+    }
+
+    @Override
+    public String toString() {
+        return "\nVozIP call" + "\nCall type: " + this.getCallType()
+                + "\nMinutes: " + this.getTime();
+    }
     
 }

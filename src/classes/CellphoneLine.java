@@ -10,4 +10,10 @@ public class CellphoneLine extends TelephoneLine {
         super(time, callType);
     }
 
+    @Override
+    public String toString() {
+        return "\nCellphone line call" + "\nCall type: " + this.getCallType()
+                + "\nMinutes: " + this.getTime();
+    }
+
 }

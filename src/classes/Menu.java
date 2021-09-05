@@ -23,35 +23,31 @@ public class Menu {
             System.out.println("2. Land line info");
             System.out.println("3. Cellphone line info");
             System.out.println("4. VozIP line info");
-            System.out.println("5. Occupation percentage");
-            System.out.println("6. Summary");
-            System.out.println("7. Get out");
+            System.out.println("5. Summary");
+            System.out.println("6. Get out");
             System.out.print("Enter an option: ");
             option = scanner.nextInt();
-            System.out.println();
             
             switch (option) {
                 case 1:
                     registerCall();
                     break;
                 case 2:
-                    System.out.println(landLineCalls);
+                    printLandLineCalls();
                     break;
                 case 3:
-                    System.out.println(cellphoneLineCalls);
+                    printCellphoneLineCalls();
                     break;
                 case 4:
-                    System.out.println(vozIPCalls);
+                    printVozIPCalls();
                     break;
                 case 5:
                     break;
-                case 6:
-                    break;
                 default:
-                    System.out.println("See you!\n");
+                    System.out.println("\nSee you!\n");
                     return;
             }
-        } while (option>= 1 && option <= 6);
+        } while (option>= 1 && option <= 5);
     }
 
     public static void registerCall() {
@@ -64,12 +60,9 @@ public class Menu {
         System.out.println("1. Land line");
         System.out.println("2. Cellphone line");
         System.out.println("3. VozIP line");
-        System.out.println();
+        System.out.print("Enter an option: ");
         optionLine = scanner.nextInt();
         System.out.println();
-
-        System.out.println("Enter time in minutes: ");
-        time = scanner.nextDouble();
         
         System.out.println("\nSelect call type");
         
@@ -78,24 +71,33 @@ public class Menu {
                 System.out.println("1. Local");
                 System.out.println("2. Long distance");
                 System.out.println("3. Cellphone");
+                System.out.print("Enter an option: ");
                 optionCall = scanner.nextInt();
                 System.out.println();
+                System.out.print("Enter time in minutes: ");
+                time = scanner.nextDouble();
                 addLandLineCall(time, optionCall);
                 break;
             case 2:
                 System.out.println("1. Local");
                 System.out.println("2. Cellphone");
+                System.out.print("Enter an option: ");
                 optionCall = scanner.nextInt();
                 System.out.println();
+                System.out.print("Enter time in minutes: ");
+                time = scanner.nextDouble();
                 addCellphoneLineCall(time, optionCall);
                 break;
             case 3:
                 System.out.println("1. Local");
                 System.out.println("2. Long distance");
                 System.out.println("3. Cellphone");
+                System.out.print("Enter an option: ");
                 optionCall = scanner.nextInt();
                 System.out.println();
-                addLandLineCall(time, optionCall);
+                System.out.print("Enter time in minutes: ");
+                time = scanner.nextDouble();
+                addVozIPCall(time, optionCall);
                 break;
             default:
                 break;
@@ -167,6 +169,115 @@ public class Menu {
 
         vozIPCalls.add(vozIPCall);
         
+    }
+
+    public static void printLandLineCalls() {
+
+        double totalMinutes = 0;
+        double totalCost = 0;
+
+        if (landLineCalls.size() == 0) {
+            System.out.println("\nThere are not land line calls registered :(");
+            return;
+        }
+
+        System.out.println("\nLAND LINE CALLS\n");
+
+        for (LandLine call : landLineCalls) {       
+            System.out.println(call);
+            totalMinutes += call.getTime();
+            
+            switch (call.getCallType()) {
+                case "Local":
+                    totalCost += call.getTime() * LandLine.minuteLocal;
+                    break;
+                case "Long distance":
+                    totalCost += call.getTime() * LandLine.minuteLongDistance;
+                    break;
+                case "Cellphone":
+                    totalCost += call.getTime() * LandLine.minuteCellphone;
+                    break;
+                default:
+                    break;
+            }        
+        }
+        
+        System.out.println("\n\nSummary:");
+        System.out.println("\nNumber of calls: " + landLineCalls.size());
+        System.out.println("Total minutes: " + totalMinutes);
+        System.out.println("Total cost: $" + totalCost);
+    }
+
+    public static void printCellphoneLineCalls() {
+
+        double totalMinutes = 0;
+        double totalCost = 0;
+
+        if (cellphoneLineCalls.size() == 0) {
+            System.out.println("\nThere are not cellphone line calls registered :(");
+            return;
+        }
+
+        System.out.println("\nCELLPHONE CALLS\n");
+
+        for (CellphoneLine call : cellphoneLineCalls) {       
+            System.out.println(call);
+            totalMinutes += call.getTime();
+            
+            switch (call.getCallType()) {
+                case "Local":
+                    totalCost += call.getTime() * CellphoneLine.minuteLocal;
+                    break;
+                case "Cellphone":
+                    totalCost += call.getTime() * CellphoneLine.minuteCellphone;
+                    break;
+                default:
+                    break;
+            }        
+        }
+        
+        System.out.println("\n\nSummary:");
+        System.out.println("\nNumber of calls: " + cellphoneLineCalls.size());
+        System.out.println("Total minutes: " + totalMinutes);
+        System.out.println("Total cost: $" + totalCost);
+    }
+
+    public static void printVozIPCalls() {
+
+        double totalMinutes = 0;
+        double totalCost = 0;
+
+        if (vozIPCalls.size() == 0) {
+            System.out.println("\nThere are not vozIP calls registered :(");
+            return;
+        }
+
+        System.out.println("\nVOZIP CALLS\n");
+
+        for (VozIP call : vozIPCalls) {     
+            System.out.println(call);
+            totalMinutes += call.getTime();
+            
+            switch (call.getCallType()) {
+                case "Local":
+                    totalCost += call.getTime() * VozIP.minuteLocal;
+                    break;
+                case "Long distance":
+                    totalCost += call.getTime() * VozIP.minuteLongDistance;
+                    break;
+                case "Cellphone":
+                    totalCost += call.getTime() * VozIP.minuteCellphone;
+                    break;
+                default:
+                    break;
+            }        
+        }
+        
+        System.out.println("\n\nSummary:");
+        System.out.println("Number of calls: " + vozIPCalls.size());
+        System.out.println("Total minutes: " + totalMinutes);
+        System.out.println("Total cost: $" + String.format("%.2f", totalCost));
+        System.out.println();
     }
 
 }
