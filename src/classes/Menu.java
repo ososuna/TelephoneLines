@@ -204,14 +204,19 @@ public class Menu {
 
     public static void printLandLineCalls() {
 
-        double totalMinutes = 0;
-        double totalCost = 0;
+        double totalLocalMinutes = 0;
+        double totalLongDistanceMinutes = 0;
+        double totalCellphoneMinutes = 0;
+        double totalCost;
 
         if (landLineCalls.size() == 0) {
             System.out.println("\nThere are not land line calls registered :(");
             System.out.println("\nNumber of calls: " + landLineCalls.size());
-            System.out.println("Total minutes: " + totalMinutes);
-            System.out.println("Total cost: $" + String.format("%.2f", totalCost));
+            System.out.println("Total local minutes: " + totalLocalMinutes);
+            System.out.println("Total long distance minutes: " + totalLongDistanceMinutes);
+            System.out.println("Total cellphone minutes: " + totalCellphoneMinutes); 
+            System.out.println("Total minutes: " + String.format("%.1f", totalLocalMinutes + totalLongDistanceMinutes + totalCellphoneMinutes));
+            System.out.println("Total cost: $0");
             return;
         }
 
@@ -219,39 +224,48 @@ public class Menu {
 
         for (LandLine call : landLineCalls) {       
             System.out.println(call);
-            totalMinutes += call.getTime();
             
             switch (call.getCallType()) {
                 case "Local":
-                    totalCost += call.getTime() * LandLine.minuteLocal;
+                    totalLocalMinutes += call.getTime();
                     break;
                 case "Long distance":
-                    totalCost += call.getTime() * LandLine.minuteLongDistance;
+                    totalLongDistanceMinutes += call.getTime();
                     break;
                 case "Cellphone":
-                    totalCost += call.getTime() * LandLine.minuteCellphone;
+                    totalCellphoneMinutes += call.getTime();
                     break;
                 default:
                     break;
             }        
         }
         
+        totalCost = totalLocalMinutes * LandLine.minuteLocal +
+                    totalLongDistanceMinutes * LandLine.minuteLongDistance +
+                    totalCellphoneMinutes * LandLine.minuteCellphone;
+                     
         System.out.println("\n\nSummary:");
         System.out.println("\nNumber of calls: " + landLineCalls.size());
-        System.out.println("Total minutes: " + totalMinutes);
+        System.out.println("Total local minutes: " + totalLocalMinutes);
+        System.out.println("Total long distance minutes: " + totalLongDistanceMinutes);
+        System.out.println("Total cellphone minutes: " + totalCellphoneMinutes); 
+        System.out.println("Total minutes: " + String.format("%.1f", totalLocalMinutes + totalLongDistanceMinutes + totalCellphoneMinutes));
         System.out.println("Total cost: $" + String.format("%.2f", totalCost));
         System.out.println();
     }
 
     public static void printCellphoneLineCalls() {
 
-        double totalMinutes = 0;
+        double totalLocalMinutes = 0;
+        double totalCellphoneMinutes = 0;
         double totalCost = 0;
 
         if (cellphoneLineCalls.size() == 0) {
             System.out.println("\nThere are not cellphone line calls registered :(");
             System.out.println("\nNumber of calls: " + cellphoneLineCalls.size());
-            System.out.println("Total minutes: " + totalMinutes);
+            System.out.println("Total local minutes: " + totalLocalMinutes);
+            System.out.println("Total cellphone minutes: " + totalCellphoneMinutes); 
+            System.out.println("Total minutes: " + String.format("%.1f", totalLocalMinutes + totalCellphoneMinutes));
             System.out.println("Total cost: $" + String.format("%.2f", totalCost));
             System.out.println("Available local balance: $" + String.format("%.2f", cellphoneLocalBalance));
             System.out.println();
@@ -262,23 +276,27 @@ public class Menu {
 
         for (CellphoneLine call : cellphoneLineCalls) {       
             System.out.println(call.toString());
-            totalMinutes += call.getTime();
             
             switch (call.getCallType()) {
                 case "Local":
-                    totalCost += call.getTime() * CellphoneLine.minuteLocal;
+                    totalLocalMinutes += call.getTime();
                     break;
                 case "Cellphone":
-                    totalCost += call.getTime() * CellphoneLine.minuteCellphone;
+                    totalCellphoneMinutes += call.getTime();
                     break;
                 default:
                     break;
             }        
         }
         
+        totalCost = totalLocalMinutes * CellphoneLine.minuteLocal +
+                    totalCellphoneMinutes * CellphoneLine.minuteCellphone;
+
         System.out.println("\n\nSummary:");
         System.out.println("\nNumber of calls: " + cellphoneLineCalls.size());
-        System.out.println("Total minutes: " + totalMinutes);
+        System.out.println("Total local minutes: " + totalLocalMinutes);
+        System.out.println("Total cellphone minutes: " + totalCellphoneMinutes); 
+        System.out.println("Total minutes: " + String.format("%.1f", totalLocalMinutes + totalCellphoneMinutes));
         System.out.println("Total cost: $" + String.format("%.2f", totalCost));
         System.out.println("Available local balance: $" + String.format("%.2f", cellphoneLocalBalance));
         System.out.println();
@@ -286,13 +304,18 @@ public class Menu {
 
     public static void printVozIPCalls() {
 
-        double totalMinutes = 0;
+        double totalLocalMinutes = 0;
+        double totalLongDistanceMinutes = 0;
+        double totalCellphoneMinutes = 0;
         double totalCost = 0;
 
         if (vozIPCalls.size() == 0) {
             System.out.println("\nThere are not vozIP calls registered :(");
             System.out.println("Number of calls: " + vozIPCalls.size());
-            System.out.println("Total minutes: " + totalMinutes);
+            System.out.println("Total local minutes: " + totalLocalMinutes);
+            System.out.println("Total long distance minutes: " + totalLongDistanceMinutes);
+            System.out.println("Total cellphone minutes: " + totalCellphoneMinutes); 
+            System.out.println("Total minutes: " + String.format("%.1f", totalLocalMinutes + totalLongDistanceMinutes + totalCellphoneMinutes));
             System.out.println("Total cost: $" + String.format("%.2f", totalCost));
             System.out.println("Available cellphone and long distance balance: $" + String.format("%.2f", vozIPCellphoneLongDistanceBalance));
             return;
@@ -302,26 +325,32 @@ public class Menu {
 
         for (VozIP call : vozIPCalls) {     
             System.out.println(call);
-            totalMinutes += call.getTime();
             
             switch (call.getCallType()) {
                 case "Local":
-                    totalCost += call.getTime() * VozIP.minuteLocal;
+                    totalLocalMinutes += call.getTime();
                     break;
                 case "Long distance":
-                    totalCost += call.getTime() * VozIP.minuteLongDistance;
+                    totalLongDistanceMinutes += call.getTime();
                     break;
                 case "Cellphone":
-                    totalCost += call.getTime() * VozIP.minuteCellphone;
+                    totalCellphoneMinutes += call.getTime();
                     break;
                 default:
                     break;
             }        
         }
+
+        totalCost = totalLocalMinutes * VozIP.minuteLocal +
+                    totalLongDistanceMinutes * VozIP.minuteLongDistance +
+                    totalCellphoneMinutes * VozIP.minuteCellphone;
         
         System.out.println("\n\nSummary:");
         System.out.println("Number of calls: " + vozIPCalls.size());
-        System.out.println("Total minutes: " + totalMinutes);
+        System.out.println("Total local minutes: " + totalLocalMinutes);
+        System.out.println("Total long distance minutes: " + totalLongDistanceMinutes);
+        System.out.println("Total cellphone minutes: " + totalCellphoneMinutes);
+        System.out.println("Total minutes: " + String.format("%.1f", totalLocalMinutes + totalLongDistanceMinutes + totalCellphoneMinutes));
         System.out.println("Total cost: $" + String.format("%.2f", totalCost));
         System.out.println("Available cellphone and long distance balance: $" + String.format("%.2f", vozIPCellphoneLongDistanceBalance));
         System.out.println();
