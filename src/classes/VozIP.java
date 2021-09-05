@@ -13,8 +13,25 @@ public class VozIP extends TelephoneLine {
 
     @Override
     public String toString() {
-        return "\nVozIP call" + "\nCall type: " + this.getCallType()
-                + "\nMinutes: " + this.getTime();
+        
+        switch ( this.callType ) {
+            case "Local":
+                return "\nVozIP call" + "\nCall type: " + this.callType
+                        + "\nMinutes: " + this.time + "\nCost: $"
+                        + String.format("%.2f", this.time * VozIP.minuteLocal);
+            case "Long distance":
+                return "\nVozIP call" + "\nCall type: " + this.callType
+                        + "\nMinutes: " + this.time + "\nCost: $"
+                        + String.format("%.2f", this.time * VozIP.minuteLongDistance);
+            case "Cellphone":
+                return "\nVozIP call" + "\nCall type: " + this.callType
+                        + "\nMinutes: " + this.time + "\nCost: $"
+                        + String.format("%.2f", this.time * VozIP.minuteCellphone);
+            default:
+                return "\nVozIP call" + "\nCall type: " + this.callType
+                        + "\nMinutes: " + this.time;
+        }
+
     }
     
 }

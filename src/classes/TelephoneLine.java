@@ -2,8 +2,8 @@ package classes;
 
 public abstract class TelephoneLine {
     
-    private double time;
-    private String callType;
+    protected double time;
+    protected String callType;
     
     public TelephoneLine(double time, String callType) {
         this.time = time;

@@ -261,7 +261,7 @@ public class Menu {
         System.out.println("\nCELLPHONE CALLS\n");
 
         for (CellphoneLine call : cellphoneLineCalls) {       
-            System.out.println(call);
+            System.out.println(call.toString());
             totalMinutes += call.getTime();
             
             switch (call.getCallType()) {

@@ -12,8 +12,21 @@ public class CellphoneLine extends TelephoneLine {
 
     @Override
     public String toString() {
-        return "\nCellphone line call" + "\nCall type: " + this.getCallType()
-                + "\nMinutes: " + this.getTime();
+        
+        switch ( this.callType ) {
+            case "Local":
+                return "\nCellphone call" + "\nCall type: " + this.callType
+                        + "\nMinutes: " + this.time + "\nCost: $"
+                        + String.format("%.2f", this.time * CellphoneLine.minuteLocal);
+            case "Cellphone":
+                return "\nCellphone call" + "\nCall type: " + this.callType
+                        + "\nMinutes: " + this.time + "\nCost: $"
+                        + String.format("%.2f", this.time * CellphoneLine.minuteCellphone);
+            default:
+                return "\nCellphone call" + "\nCall type: " + this.callType
+                        + "\nMinutes: " + this.time;
+        }
+
     }
 
 }
