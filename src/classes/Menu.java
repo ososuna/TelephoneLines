@@ -8,17 +8,9 @@ public class Menu {
     public static int option;
     public static Scanner scanner = new Scanner(System.in);
     
-    public static ArrayList<LandLine> landLineLocalCalls = new ArrayList<LandLine>();
-    public static ArrayList<LandLine> landLineCellphoneCalls = new ArrayList<LandLine>();
-    public static ArrayList<LandLine> landLineLongDistanceCalls = new ArrayList<LandLine>();
-    
-    public static ArrayList<CellphoneLine> cellphoneLineLocalCalls = new ArrayList<CellphoneLine>();
-    public static ArrayList<CellphoneLine> cellphoneLineCellphoneCalls = new ArrayList<CellphoneLine>();
-    
-    public static ArrayList<VozIP> vozIPLocalCalls = new ArrayList<VozIP>();
-    public static ArrayList<VozIP> vozIPCellphoneCalls = new ArrayList<VozIP>();
-    public static ArrayList<VozIP> vozIPLongDistanceCalls = new ArrayList<VozIP>();
-
+    public static ArrayList<LandLine> landLineCalls = new ArrayList<LandLine>();
+    public static ArrayList<CellphoneLine> cellphoneLineCalls = new ArrayList<CellphoneLine>();
+    public static ArrayList<VozIP> vozIPCalls = new ArrayList<VozIP>();
 
     public Menu() {
         startMenu();
@@ -43,10 +35,13 @@ public class Menu {
                     registerCall();
                     break;
                 case 2:
+                    System.out.println(landLineCalls);
                     break;
                 case 3:
+                    System.out.println(cellphoneLineCalls);
                     break;
                 case 4:
+                    System.out.println(vozIPCalls);
                     break;
                 case 5:
                     break;
@@ -110,57 +105,68 @@ public class Menu {
 
     public static void addLandLineCall(double time, int callType) {
         
-        LandLine landLineCall = new LandLine(time);
+        LandLine landLineCall;
         
         switch (callType) {
             case 1:
-                landLineLocalCalls.add(landLineCall);
+                landLineCall = new LandLine(time, "Local");
                 break;       
             case 2:
-                landLineLongDistanceCalls.add(landLineCall);
+                landLineCall = new LandLine(time, "Long distance");
                 break;
             case 3:
-                landLineCellphoneCalls.add(landLineCall);
+                landLineCall = new LandLine(time, "Cellphone");
                 break;
             default:
+                landLineCall = new LandLine(time, null);
                 break;
         }
+
+        landLineCalls.add(landLineCall);
+        
     }
 
     public static void addCellphoneLineCall(double time, int callType) {
         
-        CellphoneLine cellphoneLineCall = new CellphoneLine(time);
+        CellphoneLine landLineCall;
         
         switch (callType) {
             case 1:
-                cellphoneLineLocalCalls.add(cellphoneLineCall);
+                landLineCall = new CellphoneLine(time, "Local");
                 break;       
             case 2:
-                cellphoneLineCellphoneCalls.add(cellphoneLineCall);
+                landLineCall = new CellphoneLine(time, "Cellphone");
                 break;
             default:
+                landLineCall = new CellphoneLine(time, null);
                 break;
         }
+
+        cellphoneLineCalls.add(landLineCall);
+        
     }
 
     public static void addVozIPCall(double time, int callType) {
-
-        VozIP vozIPCall = new VozIP(time);
-
+        
+        VozIP vozIPCall;
+        
         switch (callType) {
             case 1:
-                vozIPLocalCalls.add(vozIPCall);
-                break;
+                vozIPCall = new VozIP(time, "Local");
+                break;       
             case 2:
-                vozIPLongDistanceCalls.add(vozIPCall);
+                vozIPCall = new VozIP(time, "Long distance");
                 break;
             case 3:
-                vozIPCellphoneCalls.add(vozIPCall);
+                vozIPCall = new VozIP(time, "Cellphone");
                 break;
             default:
+                vozIPCall = new VozIP(time, null);
                 break;
         }
 
+        vozIPCalls.add(vozIPCall);
+        
     }
 
 }

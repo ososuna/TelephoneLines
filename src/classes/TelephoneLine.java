@@ -3,11 +3,11 @@ package classes;
 public abstract class TelephoneLine {
     
     private double time;
-    private double numberCalls;
-    private double totalCost;
+    private String callType;
     
-    public TelephoneLine(double time) {
+    public TelephoneLine(double time, String callType) {
         this.time = time;
+        this.callType = callType;
     }
 
     public double getTime() {
@@ -18,9 +18,17 @@ public abstract class TelephoneLine {
         this.time = time;
     }
 
+    public String getCallType() {
+        return callType;
+    }
+
+    public void setCallType(String callType) {
+        this.callType = callType;
+    }
+
     @Override
     public String toString() {
-        return "TelephoneLine [numberCalls=" + numberCalls + ", time=" + time + ", totalCost=" + totalCost + "]";
+        return "TelephoneLine [callType=" + callType + ", time=" + time + "]";
     }
 
 }

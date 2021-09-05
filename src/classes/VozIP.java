@@ -1,47 +1,14 @@
 package classes;
 
-public class VozIP extends AlternativeLine {
+public class VozIP extends TelephoneLine {
 
-    private double minuteLocal;
-    private double minuteLongDistance;
-    private double minuteCellphone;
-    public static double cellphoneLongDistanceBalance;
+    public static double minuteLocal = 1.5;
+    public static double minuteLongDistance = 0.8;
+    public static double minuteCellphone = 0.7;
+    public static double cellphoneLongDistanceBalance = 100;
     
-    public VozIP(double time) {
-        super(time);
-        this.minuteLocal = 1.5;
-        this.minuteLongDistance = 0.8;
-        this.minuteCellphone = 0.7;
-    }
-
-    public double getMinuteLocal() {
-        return minuteLocal;
-    }
-
-    public void setMinuteLocal(double minuteLocal) {
-        this.minuteLocal = minuteLocal;
-    }
-
-    public double getMinuteLongDistance() {
-        return minuteLongDistance;
-    }
-
-    public void setMinuteLongDistance(double minuteLongDistance) {
-        this.minuteLongDistance = minuteLongDistance;
-    }
-
-    public double getMinuteCellphone() {
-        return minuteCellphone;
-    }
-
-    public void setMinuteCellphone(double minuteCellphone) {
-        this.minuteCellphone = minuteCellphone;
-    }
-
-    @Override
-    public String toString() {
-        return "VozIP [minuteCellphone=" + minuteCellphone + ", minuteLocal=" + minuteLocal + ", minuteLongDistance="
-                + minuteLongDistance + "]";
-    }
-
+    public VozIP(double time, String callType) {
+        super(time, callType);
+    }    
+    
 }
